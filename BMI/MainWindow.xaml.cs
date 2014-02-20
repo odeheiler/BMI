@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Services;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -49,12 +50,35 @@ namespace BMI
             }
         }
 
-        private void BmiButton_OnClick(object sender, RoutedEventArgs e)
+        private void BmiButton_OnClick(object sender , RoutedEventArgs e)
         {
-            per.Neck = Convert.ToDouble(neckBox.Text);
-            per.Waist = Convert.ToDouble(waistBox.Text);
-            per.Hip = Convert.ToDouble(HipBox.Text);
-            bmiBox.Text = per.CalculateBMI();
+            try
+            {
+                bmiBox.Text = per.CalculateBMI();
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Unable to peform calculation.");
+            }
+        }
+        private void FatButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                per.Neck = Convert.ToDouble(neckBox.Text);
+                per.Waist = Convert.ToDouble(waistBox.Text);
+                if (per.IsMale==false)
+                {
+                  per.Hip = Convert.ToDouble(HipBox.Text);
+                }
+                
+                fatBox.Text = per.CalculateBodyFat();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Please Enter Valid Values.");
+            }
 
         }
     }

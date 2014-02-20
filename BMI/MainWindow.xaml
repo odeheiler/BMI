@@ -62,7 +62,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
 
                 </Grid.RowDefinitions>
                 <StackPanel Orientation="Horizontal">
@@ -73,8 +73,9 @@
                              Width="50"
                              Height="Auto" />
                 </StackPanel>
-                <Separator Grid.Row="1"></Separator>
-                <TextBlock Grid.Row="2"
+                <Button Click="BmiButton_OnClick" Grid.Row="1" Width="100" HorizontalAlignment="Left">Calculate</Button>
+                <Separator Grid.Row="2"></Separator>
+                <TextBlock Grid.Row="3"
                            Text="" />
             </Grid>
         </TabItem>
@@ -123,7 +124,7 @@
                              IsReadOnly="True" />
                 </StackPanel>
                 <Button Name="BmiButton"
-                        Click="BmiButton_OnClick">Calculate</Button>
+                        Click="FatButton_OnClick">Calculate</Button>
             </StackPanel>
 
         </TabItem>
