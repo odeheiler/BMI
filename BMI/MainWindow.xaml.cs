@@ -33,27 +33,14 @@ namespace BMI
             };
         }
 
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                per.Height = Convert.ToDouble(heightBox.Text);
-                per.Weight = Convert.ToDouble(weightBox.Text);
-                per.IsMale = Male.IsChecked;
-
-            }
-
-            catch (Exception)
-            {
-
-                MessageBox.Show("Please Valid Values");
-            }
-        }
+        
 
         private void BmiButton_OnClick(object sender , RoutedEventArgs e)
         {
             try
             {
+                per.Height = Convert.ToDouble(heightBox.Text);
+                per.Weight = Convert.ToDouble(weightBox.Text);
                 bmiBox.Text = per.CalculateBMI();
             }
             catch (Exception)
@@ -66,20 +53,52 @@ namespace BMI
         {
             try
             {
+                per.Height = Convert.ToDouble(heightBox.Text);
+                per.Weight = Convert.ToDouble(weightBox.Text);
+                per.IsMale = Male.IsChecked;
                 per.Neck = Convert.ToDouble(neckBox.Text);
                 per.Waist = Convert.ToDouble(waistBox.Text);
                 if (per.IsMale==false)
                 {
-                  per.Hip = Convert.ToDouble(HipBox.Text);
+                    per.Hip = Convert.ToDouble(HipBox.Text);
+                    fatBox.Text=per.CalculateBodyFat();
                 }
-                
-                fatBox.Text = per.CalculateBodyFat();
+                else
+                {
+                    fatBox.Text = per.CalculateBodyFat();
+                }
             }
             catch (Exception)
             {
                 MessageBox.Show("Please Enter Valid Values.");
             }
 
+        }
+
+        private void HipBox_OnGotFocus(object sender, RoutedEventArgs e)
+        {
+            
+            if (HipBox.Focus()==true&&HipBox.Text.Equals("(If Female)"))
+            {
+                HipBox.Text = "";
+            }
+        }
+
+        private void CalorieButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                per.Height = Convert.ToDouble(heightBox.Text);
+                per.Weight = Convert.ToDouble(weightBox.Text);
+                per.IsMale = Male.IsChecked;
+                    
+                MaintenenceBox.Text = per.CalculateMaintenenceCalories(ActivityComboBox.Text, Convert.ToDouble(bfCalBox.Text));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }
